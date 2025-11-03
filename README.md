@@ -113,7 +113,7 @@ The compare_models.py script can be used to compare the performance (MAE) of dif
 
 | Model      | Framework | Metric | Output Example |
 | ---------- | --------- | ------ | -------------- |
-| CatBoost   | CatBoost  | MAE    | 5.13 kcal      |
-| XGBoost    | XGBoost   | MAE    | 5.41 kcal      |
-| PyTorch NN | PyTorch   | MAE    | 6.02 kcal      |
+| CatBoost   | CatBoost  | MAE    | 0.48 kcal      |
+| XGBoost    | XGBoost   | MAE    | 0.86 kcal      |
+| PyTorch NN | PyTorch   | MAE    | 4.62 kcal      |
 
