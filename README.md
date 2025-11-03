@@ -107,6 +107,10 @@ Uses standard training loops with loss functions such as MSELoss or L1Loss.
 
 Reports MAE at the end of training for easy comparison with other models.
 
+# ⚖️ Model Comparison
+
+The compare_models.py script can be used to compare the performance (MAE) of different models side by side, identifying which algorithm performs best for calorie burn prediction.
+
 | Model      | Framework | Metric | Output Example |
 | ---------- | --------- | ------ | -------------- |
 | CatBoost   | CatBoost  | MAE    | 5.13 kcal      |
