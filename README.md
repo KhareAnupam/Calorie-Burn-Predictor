@@ -107,3 +107,9 @@ Uses standard training loops with loss functions such as MSELoss or L1Loss.
 
 Reports MAE at the end of training for easy comparison with other models.
 
+| Model      | Framework | Metric | Output Example |
+| ---------- | --------- | ------ | -------------- |
+| CatBoost   | CatBoost  | MAE    | 5.13 kcal      |
+| XGBoost    | XGBoost   | MAE    | 5.41 kcal      |
+| PyTorch NN | PyTorch   | MAE    | 6.02 kcal      |
+
