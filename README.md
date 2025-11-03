@@ -39,28 +39,6 @@ The project uses two main CSV files:
 
 These datasets are merged and processed to train and evaluate different ML models.
 
----
-
-## 📁 Project Structure
-Calorie Burn predictor/
-├── calories.csv
-├── exercise.csv
-├── compare_models.py
-├── ML_catboost.py
-├── XGBoost.py
-├── pytorch.py
-├── catboost_info/
-│ ├── catboost_training.json
-│ ├── learn_error.tsv
-│ ├── test_error.tsv
-│ └── ...
-├── .gradio/
-│ └── flagged/
-│ └── dataset1.csv
-└── .gitignore
-
----
-
 ## ⚙️ Installation
 
 1. Clone the repository:
@@ -70,7 +48,7 @@ Calorie Burn predictor/
 2. Create and activate a virtual environment:   
   python -m venv venv
   .\venv\Scripts\activate   # On Windows
-  # OR
+   OR
   source venv/bin/activate  # On macOS/Linux
 
 3. Install dependencies:
@@ -92,7 +70,7 @@ python pytorch.py
 
 Each script trains the model on the calorie–exercise dataset and outputs the Mean Absolute Error (MAE) as a performance metric.
 
-🧠 Model Descriptions
+# 🧠 Model Descriptions
 🐈 CatBoost Model
 
 File: ML_catboost.py
