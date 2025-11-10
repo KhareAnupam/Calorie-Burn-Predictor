@@ -1,0 +1,3 @@
+Gender,Age (years),Duration (minutes),Heart Rate (bpm),Body Temperature (°C),Height (cm),Weight (kg),output,timestamp
+male,22,20,120,35,98,87,Predicted Calories Burned: 137.61 kcal,2025-11-10 17:21:19.925489
+male,25,20,120,35,98,87,Predicted Calories Burned: 140.65 kcal,2025-11-10 17:21:49.973298

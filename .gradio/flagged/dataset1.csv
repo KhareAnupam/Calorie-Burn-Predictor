@@ -1,2 +1,3 @@
 BMI,Duration (minutes),Heart Rate (bpm),Body Temperature (°C),Gender,output,timestamp
 15.4,265,122,39,male,Predicted Calories Burned: 206.66 kcal (Model: CatBoost),2025-09-07 21:35:33.068058
+18,30,87,34,male,Predicted Calories Burned: 95.75 kcal (Model: CatBoost),2025-11-10 16:32:03.422782

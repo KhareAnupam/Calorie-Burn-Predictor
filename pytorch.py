@@ -2,12 +2,14 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import pandas as pd
+import numpy as np 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_absolute_error
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import time
 
-print("--- Starting PyTorch Script ---")
+print("--- Starting PyTorch Script with Full Metrics ---")
 
 # --- Step 1: Load Data and Add BMI Feature ---
 print("Loading data and adding BMI as a feature...")
@@ -22,7 +24,7 @@ except FileNotFoundError as e:
 data = pd.concat([exercise_data.drop(columns=['User_ID']), calories_data['Calories']], axis=1)
 data.ffill(inplace=True)
 
-# THE KEY CHANGE: Engineer the BMI feature
+# Engineer the BMI feature
 data['BMI'] = data['Weight'] / (data['Height'] / 100) ** 2
 
 # Encoding the 'Gender' variable
@@ -46,7 +48,7 @@ y_train_torch = torch.tensor(y_train.values, dtype=torch.float32).unsqueeze(1)
 X_test_torch = torch.tensor(X_test_scaled, dtype=torch.float32)
 y_test_torch = torch.tensor(y_test.values, dtype=torch.float32).unsqueeze(1)
 
-# --- Step 4: Define a Slightly More Capable PyTorch Model ---
+# --- Step 4: Defining More Capable PyTorch Model ---
 class IntermediateNet(nn.Module):
     def __init__(self, input_dim):
         super(IntermediateNet, self).__init__()
@@ -67,7 +69,8 @@ print("Training the PyTorch model...")
 
 input_dim = X_train_torch.shape[1]
 model = IntermediateNet(input_dim)
-criterion = nn.MSELoss()
+# optimizing for MSELoss (which is good for RMSE)
+criterion = nn.MSELoss() 
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 # Increased epochs to give the model more time to learn from the new feature
 n_epochs = 500
@@ -91,9 +94,21 @@ print("\n--- Evaluating the PyTorch Model ---")
 
 model.eval()
 with torch.no_grad():
-    test_predictions = model(X_test_torch).squeeze()
-    mae = mean_absolute_error(y_test_torch.numpy(), test_predictions.numpy())
+    test_predictions_tensor = model(X_test_torch).squeeze()
+    
+    # Convert tensors to numpy arrays for sklearn metrics
+    y_test_numpy = y_test_torch.numpy()
+    test_predictions_numpy = test_predictions_tensor.numpy()
+    # Calculating all three metrics
+    final_mae = mean_absolute_error(y_test_numpy, test_predictions_numpy)
+    final_mse = mean_squared_error(y_test_numpy, test_predictions_numpy)
+    final_rmse = np.sqrt(final_mse) 
+    final_r2 = r2_score(y_test_numpy, test_predictions_numpy)
 
 print("\n" + "="*50)
-print(f"PyTorch - Final Mean Absolute Error (MAE): {mae:.4f} kcal")
+print(" PyTorch Model Evaluation Results")
+print("="*50)
+print(f" Mean Absolute Error (MAE):     {final_mae:.4f} kcal")
+print(f" Root Mean Squared Error (RMSE): {final_rmse:.4f} kcal")
+print(f" R-squared (R²):                {final_r2:.4f}")
 print("="*50)

@@ -3,12 +3,12 @@ import numpy as np
 import xgboost as xgb
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import MinMaxScaler, PolynomialFeatures
-from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score  # All 3 METRICS
 import time
 
-print("--- Starting Powerful XGBoost Script ---")
+print("--- Starting Powerful XGBoost Script with Full Metrics ---")
 
-# --- Step 1: Load and Prepare Data 
+# --- Step 1: Load and Prepare Data
 print("Loading and preparing data...")
 
 try:
@@ -20,9 +20,9 @@ except FileNotFoundError as e:
 
 # Combine datasets and handle potential missing values
 combined_data = pd.concat([exercise_data.drop(columns=['User_ID']), calories_data['Calories']], axis=1)
-combined_data.ffill(inplace=True) # Using ffill as in the original script
+combined_data.ffill(inplace=True) 
 
-# --- Step 2: Advanced Feature Engineering (The "Secret Weapon") ---
+# --- Step 2: Advanced Feature Engineering ---
 print("Executing advanced feature engineering...")
 
 # Create BMI, Age_Group, and log-transform Duration
@@ -51,7 +51,7 @@ print("Splitting and scaling data...")
 # Split data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X_poly, y, test_size=0.2, random_state=42)
 
-# Apply MinMaxScaler 
+# Apply MinMaxScaler
 scaler = MinMaxScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
@@ -60,18 +60,19 @@ X_test_scaled = scaler.transform(X_test)
 print("\n--- Searching for the best XGBoost parameters ---")
 # This step systematically finds the best model settings.
 
-# Define the parameter grid to search
+# Defining parameter grid to search
 param_grid = {
-    'n_estimators': [500, 1000],          # Number of trees
-    'learning_rate': [0.05, 0.1],         # Step size shrinkage
-    'max_depth': [3, 5, 7],               # Maximum depth of a tree
-    'colsample_bytree': [0.7, 1.0],       # Subsample ratio of columns when constructing each tree
+    'n_estimators': [500, 1000],        # Number of trees
+    'learning_rate': [0.05, 0.1],       # Step size shrinkage
+    'max_depth': [3, 5, 7],             # Maximum depth of a tree
+    'colsample_bytree': [0.7, 1.0],     # Subsample ratio of columns when constructing each tree
 }
 
-# Initialize the XGBoost Regressor  
+# Initialize the XGBoost Regressor
 xgb_reg = xgb.XGBRegressor(random_state=42)
 
-# Initialize GridSearchCV    3-fold cross-validation  (Hyperparameter Tuning)
+# Initialize GridSearchCV      3-fold cross-validation  (Hyperparameter Tuning)
+# scoring='neg_mean_absolute_error' means GridSearchCV optimizes for MAE.
 grid_search = GridSearchCV(estimator=xgb_reg, param_grid=param_grid,
                            cv=3, n_jobs=-1, scoring='neg_mean_absolute_error', verbose=2)
 
@@ -91,9 +92,16 @@ best_xgb_model = grid_search.best_estimator_
 # Make predictions on the test data
 final_predictions = best_xgb_model.predict(X_test_scaled)
 
-# Calculate and print the final Mean Absolute Error (MAE)
+# Calculating all three metrics
 final_mae = mean_absolute_error(y_test, final_predictions)
+final_mse = mean_squared_error(y_test, final_predictions)
+final_rmse = np.sqrt(final_mse) 
+final_r2 = r2_score(y_test, final_predictions)
 
 print("\n" + "="*50)
-print(f" Powerful XGBoost - Final Mean Absolute Error (MAE): {final_mae:.4f} kcal")
+print(" Powerful XGBoost Model Evaluation Results")
+print("="*50)
+print(f" Mean Absolute Error (MAE):     {final_mae:.4f} kcal")
+print(f" Root Mean Squared Error (RMSE): {final_rmse:.4f} kcal")
+print(f" R-squared (R²):                {final_r2:.4f}")
 print("="*50)
