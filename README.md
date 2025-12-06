@@ -8,7 +8,7 @@
 ---
 # RentEase 
  [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen)](https://calorie-burn-predictor-jywf.onrender.com/)  
- **Live Demo:** [https://your-deployment-link.com](https://calorie-burn-predictor-jywf.onrender.com/)
+ **Live Demo:** [https://calorie-burn-predictor-jywf.onrender.com/](https://calorie-burn-predictor-jywf.onrender.com/)
 
 ---
 
