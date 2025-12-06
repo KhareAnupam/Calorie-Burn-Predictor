@@ -6,6 +6,11 @@
 ![ML](https://img.shields.io/badge/Machine%20Learning-Calorie%20Prediction-yellow)
 
 ---
+# RentEase 
+ [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen)](https://calorie-burn-predictor-jywf.onrender.com/)  
+ **Live Demo:** [https://your-deployment-link.com](https://calorie-burn-predictor-jywf.onrender.com/)
+
+---
 
 ## 📖 Introduction
 **Calorie Burn Predictor** is a machine learning project that estimates the number of calories burned during physical exercise based on physiological and activity data.  
