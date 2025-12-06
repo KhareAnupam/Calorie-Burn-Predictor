@@ -31,7 +31,6 @@ data['BMI'] = data['Weight'] / (data['Height'] / 100) ** 2
 data.replace({"Gender": {'male': 0, 'female': 1}}, inplace=True)
 
 # Prepare features (X) and target (y)
-# Using BMI and drop Height/Weight to avoid redundant information
 X = data[['Gender', 'Age', 'Duration', 'Heart_Rate', 'Body_Temp', 'BMI']]
 y = data['Calories']
 
@@ -52,7 +51,6 @@ y_test_torch = torch.tensor(y_test.values, dtype=torch.float32).unsqueeze(1)
 class IntermediateNet(nn.Module):
     def __init__(self, input_dim):
         super(IntermediateNet, self).__init__()
-        # A slightly wider network to learn better
         self.fc1 = nn.Linear(input_dim, 128)
         self.fc2 = nn.Linear(128, 64)
         self.fc3 = nn.Linear(64, 1)
@@ -72,7 +70,6 @@ model = IntermediateNet(input_dim)
 # optimizing for MSELoss (which is good for RMSE)
 criterion = nn.MSELoss() 
 optimizer = optim.Adam(model.parameters(), lr=0.001)
-# Increased epochs to give the model more time to learn from the new feature
 n_epochs = 500
 
 start_time = time.time()

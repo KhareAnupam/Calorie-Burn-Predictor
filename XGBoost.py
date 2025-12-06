@@ -58,7 +58,6 @@ X_test_scaled = scaler.transform(X_test)
 
 # --- Step 4: Hyperparameter Tuning with GridSearchCV ---
 print("\n--- Searching for the best XGBoost parameters ---")
-# This step systematically finds the best model settings.
 
 # Defining parameter grid to search
 param_grid = {

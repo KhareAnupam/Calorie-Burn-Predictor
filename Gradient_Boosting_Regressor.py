@@ -1,10 +1,8 @@
 import pandas as pd
 import numpy as np
-# --- NEW MODEL ---
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, PolynomialFeatures
-# --- All 3 METRICS ---
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import time
 
@@ -24,7 +22,6 @@ combined_data = pd.concat([exercise_data.drop(columns=['User_ID']), calories_dat
 combined_data.ffill(inplace=True)
 
 # --- Step 2: Advanced Feature Engineering ---
-# Using the same feature engineering as the XGBoost script for a fair comparison
 print("Executing advanced feature engineering...")
 
 combined_data['BMI'] = combined_data['Weight'] / (combined_data['Height'] / 100) ** 2
@@ -53,8 +50,6 @@ X_test_scaled = scaler.transform(X_test)
 
 # --- Step 4: Train the Gradient Boosting Model ---
 print("\n--- Training the Gradient Boosting Regressor ---")
-# We can tune this, but starting with good defaults is fine
-# n_estimators=500 is a good starting point (XGBoost used this)
 gb_model = GradientBoostingRegressor(
     n_estimators=500,
     learning_rate=0.05, # Matching the XGBoost/CatBoost LR

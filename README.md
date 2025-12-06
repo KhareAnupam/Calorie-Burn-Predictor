@@ -52,7 +52,7 @@ These datasets are merged and processed to train and evaluate different ML model
   source venv/bin/activate  # On macOS/Linux
 
 3. Install dependencies:
-  pip install pandas scikit-learn torch xgboost catboost gradio
+  pip install pandas scikit-learn torch xgboost catboost gradio numpy
 
 Usage
 

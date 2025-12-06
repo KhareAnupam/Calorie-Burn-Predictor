@@ -50,8 +50,6 @@ X_test_scaled = scaler.transform(X_test)
 
 # --- Step 4: Train the Random Forest Model ---
 print("\n--- Training the Random Forest Regressor ---")
-# n_estimators=500 to be comparable to the other models
-# n_jobs=-1 tells the model to use all available CPU cores for training
 rf_model = RandomForestRegressor(
     n_estimators=500,
     random_state=42,
