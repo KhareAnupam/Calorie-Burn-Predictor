@@ -6,7 +6,7 @@
 ![ML](https://img.shields.io/badge/Machine%20Learning-Calorie%20Prediction-yellow)
 
 ---
-# RentEase 
+# Calorie Burn Predictor 
  [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen)](https://calorie-burn-predictor-jywf.onrender.com/)  
  **Live Demo:** [https://calorie-burn-predictor-jywf.onrender.com/](https://calorie-burn-predictor-jywf.onrender.com/)
 
