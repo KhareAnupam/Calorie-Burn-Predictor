@@ -149,4 +149,6 @@ with gr.Blocks(theme=tech_theme, title="Calorie Predictor", css=gradient_css) as
     )
 
 print("\nLaunching Gradio App with new UI...")
-interface.launch()
+
+# interface.launch()  # for local running
+interface.launch(server_name="0.0.0.0", server_port=7860) # for deployment on render.
